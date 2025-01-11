@@ -1,0 +1,43 @@
+# Vagrantfile for setting up 3 Ubuntu 22.04 VMs with specific names for ansible 
+
+Vagrant.configure("2") do |config|
+
+  # Define the base box
+  config.vm.box = "generic/ubuntu2204"
+
+  # Ansible Controller Configuration
+  config.vm.define "controller" do |controller|
+    controller.vm.box = "generic/ubuntu2204"
+    controller.vm.hostname = "controller"
+    controller.vm.network "private_network", ip: "192.168.56.61"
+    controller.vm.provider "virtualbox" do |vb|
+      vb.name = "controller"
+      vb.memory = 1024
+      vb.cpus = 2
+    end
+  end
+
+  # Ansible Target 1 Configuration
+  config.vm.define "target1" do |target1|
+    target1.vm.box = "generic/ubuntu2204"
+    target1.vm.hostname = "target1"
+    target1.vm.network "private_network", ip: "192.168.56.62"
+    target1.vm.provider "virtualbox" do |vb|
+      vb.name = "target1"
+      vb.memory = 1024
+      vb.cpus = 2
+    end
+  end
+
+  # Ansible Target 2 Configuration
+  config.vm.define "target2" do |target2|
+    target2.vm.box = "generic/ubuntu2204"
+    target2.vm.hostname = "target2"
+    target2.vm.network "private_network", ip: "192.168.56.63"
+    target2.vm.provider "virtualbox" do |vb|
+      vb.name = "target2"
+      vb.memory = 1024
+      vb.cpus = 2
+    end
+  end
+end
